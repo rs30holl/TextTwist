@@ -2,6 +2,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
+import javax.swing.*;
 /**
  * Write a description of class TextTwist here.
  *
@@ -19,14 +20,14 @@ public class TextTwist
         Scanner reader = new Scanner(file);
         letters = reader.next();
         words = new ArrayList<>();
-        check = words.size();
-
+        
         while (reader.hasNext()){
             String str = reader.nextLine();
             if (str.length() > 2){
                 words.add(str);
             }
         }
+        check = words.size();
 
         reader.close();
     }
@@ -46,12 +47,15 @@ public class TextTwist
                 if (guess.equals(words.get(i))){
                     TextTwistPanel.labelList.get(i).setText(guess);
                     check--;
+                    if (check == 0){
+                        TextTwistPanel.winLabel.setVisible(true);
+                        for (JButton b : TextTwistPanel.buttonList){
+                            b.setEnabled(false);
+                        }
+                    }
                     break;
                 }
             }
-        }
-        if (check == 0){
-            TextTwistPanel.winLabel.setVisible(true);
         }
     }
 }

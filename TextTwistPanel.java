@@ -13,11 +13,11 @@ import java.io.*;
 public class TextTwistPanel extends JFrame
 {
     private int width, height;
-    private ArrayList<JButton> buttonList = new ArrayList<>();
+    public static ArrayList<JButton> buttonList = new ArrayList<>();
     public static ArrayList<JLabel> labelList = new ArrayList<>();
     private JLabel guess, timer;
     public static JLabel winLabel;
-    private JButton clear, reshuffle, enter;
+    private JButton clear, twist, enter;
     private JMenuBar menuBar;
     private File file;
 
@@ -35,13 +35,15 @@ public class TextTwistPanel extends JFrame
         JPanel ttPanel = new JPanel();
         ttPanel.setPreferredSize(new Dimension(750,1000));
         ttPanel.setLayout(null);
-        ttPanel.setBackground(Color.WHITE);
-        
+        ttPanel.setBackground(Color.CYAN);
+
         Font f = new Font("sans-serif", Font.BOLD, 30);
 
         clear = new JButton();
-        clear.setBounds(495,250,75,50);
+        clear.setBounds(545,250,100,75);
         clear.setText("Clear");
+        clear.setBackground(Color.YELLOW);
+        clear.setFont(new Font("sans-serif", Font.BOLD, 18));
         clear.setVisible(true);
         clear.addActionListener(new ActionListener(){
                 public void actionPerformed(ActionEvent evt){
@@ -52,24 +54,28 @@ public class TextTwistPanel extends JFrame
                 }
             });
 
-        reshuffle = new JButton();
-        reshuffle.setBounds(410,250,75,50);
-        reshuffle.setText("Reshuffle");
-        reshuffle.setVisible(true);
-        reshuffle.addActionListener(new ActionListener(){
+        twist = new JButton();
+        twist.setBounds(435,250,100,75);
+        twist.setText("Twist");
+        twist.setBackground(Color.YELLOW);
+        twist.setFont(new Font("sans-serif", Font.BOLD, 18));
+        twist.setVisible(true);
+        twist.addActionListener(new ActionListener(){
                 public void actionPerformed(ActionEvent evt){
                     Collections.shuffle(buttonList);
                     int counter = 1;
                     for (JButton b : buttonList){
-                        b.setBounds(325 + (50 * counter),175,75,50);
+                        b.setBounds(225 + (65 * counter),175,65,65);
                         counter++;
                     }
                 }
             });
 
         enter = new JButton();
-        enter.setBounds(325,250,75,50);
+        enter.setBounds(325,250,100,75);
         enter.setText("Enter");
+        enter.setBackground(Color.YELLOW);
+        enter.setFont(new Font("sans-serif", Font.BOLD, 18));
         enter.setVisible(true);
         enter.addActionListener(new ActionListener(){
                 public void actionPerformed(ActionEvent evt){
@@ -97,13 +103,15 @@ public class TextTwistPanel extends JFrame
         for (char c : test.letters.toCharArray()){
             JButton b = new JButton();
             b.setText(Character.toString(c));
-            b.setBounds(325 + (50 * counter),175,75,50);
+            b.setBounds(225 + (65 * counter),175,65,65);
             b.addActionListener(new ActionListener(){
                     public void actionPerformed(ActionEvent evt){
                         guess.setText(guess.getText() + " " + c);
                         b.setEnabled(false);
                     }
                 });
+            b.setBackground(Color.LIGHT_GRAY);
+            b.setFont(f);
             buttonList.add(b);
             ttPanel.add(b);
             counter++;
@@ -127,7 +135,7 @@ public class TextTwistPanel extends JFrame
         }
 
         ttPanel.add(clear);
-        ttPanel.add(reshuffle);
+        ttPanel.add(twist);
         ttPanel.add(enter);
         ttPanel.add(guess);
         ttPanel.add(winLabel);
