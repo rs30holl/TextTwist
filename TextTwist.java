@@ -4,10 +4,12 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import javax.swing.*;
 /**
- * Write a description of class TextTwist here.
+ * TextTwist searches the text file to see if the letters selected
+ * form a worm that is within the document.
  *
- * @author (your name)
- * @version (a version number or a date)
+ * @author (Ryan Holland, Julia Krasinski, Briella Sala,
+ * Matt Harrison, Michael Lostritto)
+ * @version (4.7.2019)
  */
 public class TextTwist
 {
@@ -15,6 +17,12 @@ public class TextTwist
     public static ArrayList<String> words;
     private static int check;
 
+    /**
+     * Itterates through a file to see if there is a word that it at least
+     * 2 letters long. If there is, it is added to an ArrayList. 
+     * 
+     * @param input: File
+     */
     public TextTwist(File input) throws FileNotFoundException{
         File file = input;
         Scanner reader = new Scanner(file);
@@ -32,6 +40,14 @@ public class TextTwist
         reader.close();
     }
 
+    /**
+     * If the ArrayList contains the word that the enters, return true
+     * if not, return false. 
+     * 
+     * @param guess: String
+     * @return true
+     * @return false
+     */
     public static boolean checkWord(String guess){
         if (words.contains(guess)){
             return true;
@@ -40,6 +56,12 @@ public class TextTwist
         return false;
     }
 
+    /**
+     * Takes the letters that the user clicks to form a word and removes the spaces. 
+     * Displays scrambled letters as buttons with letters on each. 
+     * 
+     * @param guess: String
+     */
     public static void play(String guess){
         guess = guess.replace(" ", "");
         if (checkWord(guess)){
