@@ -5,10 +5,11 @@ import java.util.*;
 import java.io.*;
 
 /**
- * Write a description of class TextTwistPanel here.
+ * This displays the TextTwistPanel.
  *
- * @author (your name)
- * @version (a version number or a date)
+ * @author (Ryan Holland, Julia Krasinski, Briella Sala,
+ * Matt Harrison, Michael Lostritto)
+ * @version (4.7.2019)
  */
 public class TextTwistPanel extends JFrame
 {
@@ -22,6 +23,11 @@ public class TextTwistPanel extends JFrame
     private File file;
     private javax.swing.Timer t;
 
+    /**
+     * Obtains the file then builds the panel for the Text Twist game.  
+     * 
+     * @param fileName: String
+     */
     public TextTwistPanel(String fileName) throws FileNotFoundException{
         file = new File(fileName);
 
@@ -181,6 +187,9 @@ public class TextTwistPanel extends JFrame
         this.setVisible(true);
     }
 
+    /**
+     * Generates the menu of options for the game. 
+     */
     public void generateMenu(){
         menuBar = new JMenuBar();
 
@@ -197,6 +206,9 @@ public class TextTwistPanel extends JFrame
         menuBar.add(tools);
     }
 
+    /**
+     * Main method for playing the Text Twist game.
+     */
     public static void main(String[] args){
         javax.swing.SwingUtilities.invokeLater(new Runnable(){
                 public void run(){
