@@ -11,9 +11,12 @@ VERSION or DATE: Spring 2019
 HOW TO START THIS PROJECT: With BlueJ open, run the TextTwistPanel.
 AUTHORS: Ryan Holland, Julia Krasinski, Briella Sala, Matt Harrison, 
 and Michael Lostritto
-USER INSTRUCTIONS: Run the TextTwistPanel file from the BlueJ console. 
-When the panel opens, select various letters to see if it matches a word
-from within the list. If the letters entered form a word that is found, 
+USER INSTRUCTIONS: 
+1.Run the TextTwistPanel file from the BlueJ console. 
+2.When the panel opens, select various letters to see if it matches a word
+from within the list. 
+3.If the letters entered form a word that is found, 
 it is added to the left side of the panel where the matched words are 
-displayed. If the letters entered do not match a word from the file,it 
+displayed. 
+4.If the letters entered do not match a word from the file,it 
 is not added to the word list displayed. 
