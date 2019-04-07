@@ -15,11 +15,12 @@ public class TextTwistPanel extends JFrame
     private int width, height;
     public static ArrayList<JButton> buttonList = new ArrayList<>();
     public static ArrayList<JLabel> labelList = new ArrayList<>();
-    private JLabel guess, timer;
+    private JLabel guess, timer, score, points;
     public static JLabel winLabel;
     private JButton clear, twist, enter;
     private JMenuBar menuBar;
     private File file;
+    private javax.swing.Timer t;
 
     public TextTwistPanel(String fileName) throws FileNotFoundException{
         file = new File(fileName);
@@ -40,7 +41,7 @@ public class TextTwistPanel extends JFrame
         Font f = new Font("sans-serif", Font.BOLD, 30);
 
         clear = new JButton();
-        clear.setBounds(545,250,100,75);
+        clear.setBounds(545,350,100,75);
         clear.setText("Clear");
         clear.setBackground(Color.YELLOW);
         clear.setFont(new Font("sans-serif", Font.BOLD, 18));
@@ -55,7 +56,7 @@ public class TextTwistPanel extends JFrame
             });
 
         twist = new JButton();
-        twist.setBounds(435,250,100,75);
+        twist.setBounds(435,350,100,75);
         twist.setText("Twist");
         twist.setBackground(Color.YELLOW);
         twist.setFont(new Font("sans-serif", Font.BOLD, 18));
@@ -65,14 +66,14 @@ public class TextTwistPanel extends JFrame
                     Collections.shuffle(buttonList);
                     int counter = 1;
                     for (JButton b : buttonList){
-                        b.setBounds(225 + (65 * counter),175,65,65);
+                        b.setBounds(225 + (65 * counter),275,65,65);
                         counter++;
                     }
                 }
             });
 
         enter = new JButton();
-        enter.setBounds(325,250,100,75);
+        enter.setBounds(325,350,100,75);
         enter.setText("Enter");
         enter.setBackground(Color.YELLOW);
         enter.setFont(new Font("sans-serif", Font.BOLD, 18));
@@ -88,8 +89,9 @@ public class TextTwistPanel extends JFrame
             });
 
         guess = new JLabel();
-        guess.setBounds(350,75,200,75);
+        guess.setBounds(350,175,200,75);
         guess.setFont(f);
+        guess.setBackground(Color.BLUE);
         guess.setVisible(true);
 
         winLabel = new JLabel();
@@ -98,12 +100,42 @@ public class TextTwistPanel extends JFrame
         winLabel.setFont(f);
         winLabel.setVisible(false);
 
+        score = new JLabel();
+        score.setBounds(325,475,150,75);
+        score.setFont(f);
+        score.setText("Score:");
+        score.setVisible(true);
+
+        timer = new JLabel();
+        timer.setBounds(325,550,250,75);
+        timer.setFont(f);
+        timer.setText("Time:");
+        timer.setVisible(true);
+
+        t = new javax.swing.Timer(1000, new ActionListener(){
+                int seconds = 0;
+                int minutes = 0;
+                public void actionPerformed(ActionEvent evt){
+                    if (seconds == 60){
+                        seconds = 0;
+                        minutes++;
+                    }
+                    if (seconds < 10){
+                        timer.setText("Time: " + minutes + ":" + "0" + seconds++);
+                    }
+                    else {
+                        timer.setText("Time: " + minutes + ":" + seconds++);
+                    }
+                }
+            });
+
+        t.start();
         int counter = 1;
 
         for (char c : test.letters.toCharArray()){
             JButton b = new JButton();
             b.setText(Character.toString(c));
-            b.setBounds(225 + (65 * counter),175,65,65);
+            b.setBounds(225 + (65 * counter),275,65,65);
             b.addActionListener(new ActionListener(){
                     public void actionPerformed(ActionEvent evt){
                         guess.setText(guess.getText() + " " + c);
@@ -139,7 +171,9 @@ public class TextTwistPanel extends JFrame
         ttPanel.add(enter);
         ttPanel.add(guess);
         ttPanel.add(winLabel);
-        //ttPanel.add(timer);
+        ttPanel.add(score);
+        //ttPanel.add(points);
+        ttPanel.add(timer);
 
         this.add(ttPanel);
         this.pack();
