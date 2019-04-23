@@ -16,7 +16,9 @@ public class TextTwistPanel extends JFrame
     private int width, height;
     public static ArrayList<JButton> buttonList = new ArrayList<>();
     public static ArrayList<JLabel> labelList = new ArrayList<>();
-    private JLabel guess, timer, score, points;
+    private JLabel guess, timer;
+    public static JLabel scoreLabel;
+    public static int score;
     public static JLabel winLabel;
     private JButton clear, twist, enter;
     private JMenuBar menuBar;
@@ -106,11 +108,11 @@ public class TextTwistPanel extends JFrame
         winLabel.setFont(f);
         winLabel.setVisible(false);
 
-        score = new JLabel();
-        score.setBounds(325,475,150,75);
-        score.setFont(f);
-        score.setText("Score:");
-        score.setVisible(true);
+        scoreLabel = new JLabel();
+        scoreLabel.setBounds(325,475,400,75);
+        scoreLabel.setFont(f);
+        scoreLabel.setText("Score: " + score);
+        scoreLabel.setVisible(true);
 
         timer = new JLabel();
         timer.setBounds(325,550,250,75);
@@ -120,17 +122,23 @@ public class TextTwistPanel extends JFrame
 
         t = new javax.swing.Timer(1000, new ActionListener(){
                 int seconds = 0;
-                int minutes = 0;
+                int minutes = 3;
                 public void actionPerformed(ActionEvent evt){
-                    if (seconds == 60){
-                        seconds = 0;
-                        minutes++;
+                    if (minutes == 0 && seconds == 0){
+                        winLabel.setText("Game Over");
+                        for (JButton b : buttonList){
+                            b.setEnabled(false);
+                        }
+                    }
+                    if (seconds == 0){
+                        seconds = 59;
+                        minutes--;
                     }
                     if (seconds < 10){
-                        timer.setText("Time: " + minutes + ":" + "0" + seconds++);
+                        timer.setText("Time: " + minutes + ":" + "0" + seconds--);
                     }
                     else {
-                        timer.setText("Time: " + minutes + ":" + seconds++);
+                        timer.setText("Time: " + minutes + ":" + seconds--);
                     }
                 }
             });
@@ -177,7 +185,7 @@ public class TextTwistPanel extends JFrame
         ttPanel.add(enter);
         ttPanel.add(guess);
         ttPanel.add(winLabel);
-        ttPanel.add(score);
+        ttPanel.add(scoreLabel);
         //ttPanel.add(points);
         ttPanel.add(timer);
 

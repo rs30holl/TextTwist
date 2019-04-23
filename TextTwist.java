@@ -68,7 +68,9 @@ public class TextTwist
             for (int i = 0; i < words.size(); i++){
                 if (guess.equals(words.get(i))){
                     TextTwistPanel.labelList.get(i).setText(guess);
+                    TextTwistPanel.score += guess.length() * 100;
                     check--;
+                    TextTwistPanel.scoreLabel.setText("Score: " + TextTwistPanel.score);
                     if (check == 0){
                         TextTwistPanel.winLabel.setVisible(true);
                         for (JButton b : TextTwistPanel.buttonList){
